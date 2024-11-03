@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Booking Form</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form id="dataForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <button type="submit">Submit</button>
+      <div id="userList"></div>
+  </form>  
+  <form id="deleteForm">
+    <input type="text" id="deleteName" placeholder="Name to Delete" required />
+    <button type="submit">Delete</button>
+</form>
+<form id="multiInputForm">
+  <input type="text" id="username" placeholder="Username" required />
+  <input type="radio" name="gender" value="male" required /> Male
+  <input type="radio" name="gender" value="female" required /> Female
+  <label>
+    <input type="checkbox" id="sport" value="Sport" /> Sport
+  </label>
+  <label>
+    <input type="checkbox" id="cricket" value="Cricket" /> Cricket
+  </label>
+  <label>
+    <input type="checkbox" id="base" value="Baseball" /> Baseball
+  </label>
+  
+  <button type="submit">Submit</button>
+</form>
+  </body>
+</html>
