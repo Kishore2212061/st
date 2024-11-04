@@ -22,6 +22,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('MongoDB connection error:', err);
   });
 
+// Print "Hello" at the root URL
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
+
 // Use auth routes
 app.use('/auth', authRoutes);
 
