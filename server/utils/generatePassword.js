@@ -27,7 +27,7 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
     }
 
     const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue)) * parseFloat(uniqueValue) * trigResult).toFixed(3);
-    console.log(calculatedPassword)
+    console.log(uniqueValue+"grw")
     return calculatedPassword;
 }
 

@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
-    const { username,password, dynamicPassword, keyValue} = req.body;
+    const { username,password, dynamicPassword, keyValue,fixedValue,trigFunction} = req.body;
     try {
         const user = await User.findOne({ username });
         if (!user) return res.status(400).json({ error: 'User not found' });
@@ -49,16 +49,17 @@ router.post('/login', async (req, res) => {
         const currentDate = new Date();
         const currentHour = currentDate.getHours();
         console.log(password)
+        console.log(fixedValue+"GEqg")
         const calculatedDynamicPassword = generateDynamicPassword(
             password,
             user.uniqueValue,
-            user.fixedValue,
+            fixedValue,
             keyValue,
             currentHour,
-            user.trigFunction
+            trigFunction
         );
 
-        console.log(calculatedDynamicPassword);
+        console.log(calculatedDynamicPassword+"EQv");
 
         if (calculatedDynamicPassword === dynamicPassword) {
             res.json({ message: 'Login successful' });
