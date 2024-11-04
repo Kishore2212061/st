@@ -22,7 +22,7 @@ function Login() {
         }, 0);
         console.log("digit"+digitSum)
         const angle = currentHour + parseFloat(keyValue);
-    
+        console.log(angle+"vsf")
         let trigResult;
         switch (trigFunction) {
             case 'sin':
@@ -40,6 +40,15 @@ function Login() {
     
         const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue)) * parseFloat(uniqueValue) * trigResult).toFixed(3);
         console.log(calculatedPassword)
+        console.log(calculatedPassword)
+
+        console.log(calculatedPassword)
+
+        console.log(calculatedPassword)
+
+        console.log(calculatedPassword)
+        console.log(calculatedPassword)
+
         setDynamicPassword(calculatedPassword); // Set the calculated dynamic password
     };
 

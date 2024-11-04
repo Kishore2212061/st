@@ -10,6 +10,7 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
     const angle = currentHour + parseFloat(keyValue);
     console.log(digitSum)
     console.log(angle)
+    console.log(keyValue)
     let trigResult;
     switch (trigFunction) {
         case 'sin':
