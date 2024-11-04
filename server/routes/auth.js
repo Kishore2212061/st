@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Register Route
 router.post('/register', async (req, res) => {
-    const { username, password, uniqueValue, fixedValue, trigFunction, keyValue1 } = req.body;
+    const { username, password,fixedValue, trigFunction, keyValue1 } = req.body;
     try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
@@ -16,7 +16,6 @@ router.post('/register', async (req, res) => {
         const newUser = new User({ 
             username, 
             password,
-            uniqueValue, 
             fixedValue, 
             trigFunction, 
             keyValue1 
@@ -30,7 +29,6 @@ router.post('/register', async (req, res) => {
             user: { 
                 id: newUser._id, 
                 username: newUser.username,
-                uniqueValue: newUser.uniqueValue, // Include other necessary fields
             } 
         });
     } catch (error) {
@@ -56,7 +54,6 @@ const currentHour= new Intl.DateTimeFormat('en-US', options).format(currentDate)
         console.log(fixedValue+"GEqg")
         const calculatedDynamicPassword = generateDynamicPassword(
             password,
-            user.uniqueValue,
             fixedValue,
             keyValue,
             currentHour,
