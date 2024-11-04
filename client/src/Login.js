@@ -63,6 +63,8 @@ function Login() {
                 password,
                 dynamicPassword: dynamicPassword, 
                 keyValue,
+                fixedValue,
+                trigFunction
             
             });
 
