@@ -3,14 +3,13 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
         const charCode = char.toLowerCase().charCodeAt(0); // Get the character code
         if (charCode >= 97 && charCode <= 122) { // Check if it's between 'a' (97) and 'z' (122)
             return sum + (charCode - 96); 
-        } else if (char === '@' || char === '.') {
-            return sum + 0; 
-        }
+        } 
         return sum; 
     }, 0);
     
     const angle = currentHour + parseFloat(keyValue);
-
+    console.log(digitSum)
+    console.log(angle)
     let trigResult;
     switch (trigFunction) {
         case 'sin':
@@ -27,6 +26,7 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
     }
 
     const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue)) * parseFloat(uniqueValue) * trigResult).toFixed(3);
+    console.log(calculatedPassword)
     return calculatedPassword;
 }
 
