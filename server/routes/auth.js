@@ -45,9 +45,11 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
         if (!user) return res.status(400).json({ error: 'User not found' });
+const currentDate = new Date();
+const options = { hour: 'numeric', hour12: false, timeZone: 'Asia/Kolkata' };
+const currentHour= new Intl.DateTimeFormat('en-US', options).format(currentDate);
 
-        const currentDate = new Date();
-        const currentHour = currentDate.getHours();
+
                 console.log(currentHour)
 
         console.log(password)
