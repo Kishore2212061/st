@@ -11,19 +11,18 @@ function Login() {
     const [trigFunction, setTrigFunction] = useState('sin');
 
     const calculateDynamicPassword = () => {
+        const currentDate = new Date();
+        const currentHour = currentDate.getHours();
         const digitSum = password.split('').reduce((sum, char) => {
-            if (!isNaN(parseInt(char, 10))) {
-                return sum + parseInt(char, 10); 
-            }
-            const charCode = char.toLowerCase().charCodeAt(0); 
-            if (charCode >= 97 && charCode <= 122) { 
+            const charCode = char.toLowerCase().charCodeAt(0); // Get the character code
+            if (charCode >= 97 && charCode <= 122) { // Check if it's between 'a' (97) and 'z' (122)
                 return sum + (charCode - 96); 
-            }
+            } 
             return sum; 
         }, 0);
-        const currentHour = new Date().getHours();
-        const angle = currentHour + parseFloat(keyValue); 
-
+        console.log("digit"+digitSum)
+        const angle = currentHour + parseFloat(keyValue);
+    
         let trigResult;
         switch (trigFunction) {
             case 'sin':
@@ -36,21 +35,28 @@ function Login() {
                 trigResult = Math.tan(angle);
                 break;
             default:
-                trigResult = Math.sin(angle); // Default to sin
+                trigResult = Math.sin(angle);
         }
-
+    
         const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue)) * parseFloat(uniqueValue) * trigResult).toFixed(3);
+        console.log(calculatedPassword)
         setDynamicPassword(calculatedPassword); // Set the calculated dynamic password
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            console.log('Username:', username);
+            console.log('Dynamic Password:', dynamicPassword);
+            console.log('Key Value:', keyValue);
             const res = await axios.post('/auth/login', {
                 username,
+                password,
                 dynamicPassword: dynamicPassword, 
-                keyValue: keyValue 
+                keyValue,
+            
             });
+
             alert('Login successful!');
         } catch (error) {
             console.error('Login error:', error);

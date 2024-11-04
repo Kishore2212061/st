@@ -7,23 +7,35 @@ function Register() {
     const [uniqueValue, setUniqueValue] = useState('');
     const [fixedValue, setFixedValue] = useState('');
     const [trigFunction, setTrigFunction] = useState('sin');
-    const [keyValue1, setKeyValue1] = useState(''); // New key value state
+    const [keyValue1, setKeyValue1] = useState('');
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true
+
         try {
-            await axios.post('/auth/register', {
+            const response = await axios.post('/auth/register', {
                 username,
                 password,
                 uniqueValue: parseFloat(uniqueValue),
                 fixedValue: parseFloat(fixedValue),
                 trigFunction,
-                keyValue1: parseFloat(keyValue1), // Include key values in the request
+                keyValue1: parseFloat(keyValue1),
             });
             alert('Registration successful!');
+            // Reset the form fields
+            setUsername('');
+            setPassword('');
+            setUniqueValue('');
+            setFixedValue('');
+            setTrigFunction('sin');
+            setKeyValue1('');
         } catch (error) {
-            console.error(error);
-            alert('Registration failed: ' + error.response.data.error);
+            console.error('Error during registration:', error);
+            alert('Registration failed: ' + (error.response ? error.response.data.error : 'An unexpected error occurred'));
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -62,6 +74,10 @@ function Register() {
         },
         buttonHover: {
             backgroundColor: '#218838',
+        },
+        loadingButton: {
+            backgroundColor: '#6c757d', // Gray color for loading state
+            cursor: 'not-allowed',
         },
     };
 
@@ -113,17 +129,18 @@ function Register() {
                     type="number"
                     value={keyValue1}
                     onChange={(e) => setKeyValue1(e.target.value)}
-                    placeholder="Key Value 1" // First key value input
+                    placeholder="Key Value 1"
                     style={styles.input}
                     required
                 />
                 <button 
                     type="submit" 
-                    style={styles.button} 
+                    style={loading ? { ...styles.button, ...styles.loadingButton } : styles.button} 
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor} 
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = loading ? styles.loadingButton.backgroundColor : styles.button.backgroundColor}
+                    disabled={loading} // Disable button when loading
                 >
-                    Register
+                    {loading ? 'Registering...' : 'Register'}
                 </button>
             </form>
         </div>
