@@ -7,7 +7,7 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
         return sum; 
     }, 0);
     
-    const angle = parseFloatcurrentHour) + parseFloat(keyValue);
+    const angle = parseFloat(currentHour) + parseFloat(keyValue);
     console.log(digitSum)
     console.log(angle)
     console.log(keyValue)
