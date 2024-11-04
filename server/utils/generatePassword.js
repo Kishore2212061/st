@@ -1,4 +1,4 @@
-function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, currentHour, trigFunction) {
+function generateDynamicPassword(password, fixedValue, keyValue, currentHour, trigFunction) {
     const digitSum = password.split('').reduce((sum, char) => {
         const charCode = char.toLowerCase().charCodeAt(0); // Get the character code
         if (charCode >= 97 && charCode <= 122) { // Check if it's between 'a' (97) and 'z' (122)
@@ -26,8 +26,7 @@ function generateDynamicPassword(password, uniqueValue, fixedValue, keyValue, cu
             trigResult = Math.sin(angle);
     }
 
-    const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue)) * parseFloat(uniqueValue) * trigResult).toFixed(3);
-    console.log(uniqueValue+"grw")
+    const calculatedPassword = (digitSum * Math.sin(parseFloat(fixedValue))  * trigResult).toFixed(3);
     return calculatedPassword;
 }
 
