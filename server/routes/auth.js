@@ -48,6 +48,8 @@ router.post('/login', async (req, res) => {
 
         const currentDate = new Date();
         const currentHour = currentDate.getHours();
+                console.log(currentHour)
+
         console.log(password)
         console.log(fixedValue+"GEqg")
         const calculatedDynamicPassword = generateDynamicPassword(
