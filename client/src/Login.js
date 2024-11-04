@@ -58,24 +58,120 @@ function Login() {
         }
     };
 
+    // Inline CSS styles
+    const styles = {
+        container: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            backgroundColor: '#f4f4f4',
+            fontFamily: 'Arial, sans-serif',
+        },
+        form: {
+            background: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+            width: '300px',
+        },
+        input: {
+            width: '100%',
+            padding: '10px',
+            margin: '10px 0',
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+        },
+        button: {
+            backgroundColor: '#007bff',
+            color: 'white',
+            padding: '10px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s ease',
+        },
+        buttonHover: {
+            backgroundColor: '#0056b3',
+        },
+    };
+
     return (
-        <div>
-            <form onSubmit={handleLogin}>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                <input type="number" value={uniqueValue} onChange={(e) => setUniqueValue(e.target.value)} placeholder="Unique Value" required />
-                <input type="number" value={fixedValue} onChange={(e) => setFixedValue(e.target.value)} placeholder="Fixed Value" required />
-                <input type="number" value={keyValue} onChange={(e) => setKeyValue(e.target.value)} placeholder="Key Value" required />
-                <select value={trigFunction} onChange={(e) => setTrigFunction(e.target.value)}>
+        <div style={styles.container}>
+            <form style={styles.form} onSubmit={handleLogin}>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                    style={styles.input}
+                    required
+                />
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                    style={styles.input}
+                    required
+                />
+                <input
+                    type="number"
+                    value={uniqueValue}
+                    onChange={(e) => setUniqueValue(e.target.value)}
+                    placeholder="Unique Value"
+                    style={styles.input}
+                    required
+                />
+                <input
+                    type="number"
+                    value={fixedValue}
+                    onChange={(e) => setFixedValue(e.target.value)}
+                    placeholder="Fixed Value"
+                    style={styles.input}
+                    required
+                />
+                <input
+                    type="number"
+                    value={keyValue}
+                    onChange={(e) => setKeyValue(e.target.value)}
+                    placeholder="Key Value"
+                    style={styles.input}
+                    required
+                />
+                <select
+                    value={trigFunction}
+                    onChange={(e) => setTrigFunction(e.target.value)}
+                    style={styles.input}
+                >
                     <option value="sin">Sin</option>
                     <option value="cos">Cos</option>
                     <option value="tan">Tan</option>
                 </select>
-                <input type="text" value={dynamicPassword} readOnly placeholder="Dynamic Password" />
-                <button type="button" onClick={calculateDynamicPassword}>
+                <input
+                    type="text"
+                    value={dynamicPassword}
+                    readOnly
+                    placeholder="Dynamic Password"
+                    style={styles.input}
+                />
+                <button 
+                    type="button" 
+                    style={styles.button} 
+                    onClick={calculateDynamicPassword}
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor} 
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
+                >
                     Calculate Dynamic Password
                 </button>
-                <button type="submit">Login</button>
+                <button 
+                    type="submit" 
+                    style={styles.button} 
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor} 
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles.button.backgroundColor}
+                >
+                    Login
+                </button>
             </form>
         </div>
     );
