@@ -21,10 +21,18 @@ router.post('/register', async (req, res) => {
             trigFunction, 
             keyValue1 
         });
-        
 
         await newUser.save();
-        res.status(201).json({ message: 'User registered successfully!' });
+
+        // Return the new user data without the password
+        res.status(201).json({ 
+            message: 'User registered successfully!', 
+            user: { 
+                id: newUser._id, 
+                username: newUser.username,
+                uniqueValue: newUser.uniqueValue, // Include other necessary fields
+            } 
+        });
     } catch (error) {
         console.error('Registration error:', error);
         res.status(500).json({ error: 'Registration failed. Please try again.' });
@@ -33,31 +41,33 @@ router.post('/register', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
-    const { username, dynamicPassword, keyValue } = req.body;
+    const { username,password, dynamicPassword, keyValue} = req.body;
     try {
         const user = await User.findOne({ username });
         if (!user) return res.status(400).json({ error: 'User not found' });
 
         const currentDate = new Date();
         const currentHour = currentDate.getHours();
+        console.log(password)
         const calculatedDynamicPassword = generateDynamicPassword(
-            user.password,
+            password,
             user.uniqueValue,
             user.fixedValue,
             keyValue,
             currentHour,
             user.trigFunction
         );
+
         console.log(calculatedDynamicPassword);
 
         if (calculatedDynamicPassword === dynamicPassword) {
             res.json({ message: 'Login successful' });
         } else {
-            console.log(calculatedDynamicPassword)
-
+            console.log(calculatedDynamicPassword);
             res.status(400).json({ error: 'Invalid dynamic password' });
         }
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ error: 'Login failed' });
     }
 });
