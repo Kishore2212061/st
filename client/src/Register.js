@@ -4,7 +4,6 @@ import axios from './api'; // Ensure this points to your Axios instance
 function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [uniqueValue, setUniqueValue] = useState('');
     const [fixedValue, setFixedValue] = useState('');
     const [trigFunction, setTrigFunction] = useState('sin');
     const [keyValue1, setKeyValue1] = useState('');
@@ -18,7 +17,6 @@ function Register() {
             const response = await axios.post('/auth/register', {
                 username,
                 password,
-                uniqueValue: parseFloat(uniqueValue),
                 fixedValue: parseFloat(fixedValue),
                 trigFunction,
                 keyValue1: parseFloat(keyValue1),
@@ -27,7 +25,6 @@ function Register() {
             // Reset the form fields
             setUsername('');
             setPassword('');
-            setUniqueValue('');
             setFixedValue('');
             setTrigFunction('sin');
             setKeyValue1('');
@@ -100,14 +97,7 @@ function Register() {
                     style={styles.input}
                     required
                 />
-                <input
-                    type="number"
-                    value={uniqueValue}
-                    onChange={(e) => setUniqueValue(e.target.value)}
-                    placeholder="Unique Value"
-                    style={styles.input}
-                    required
-                />
+               
                 <input
                     type="number"
                     value={fixedValue}
